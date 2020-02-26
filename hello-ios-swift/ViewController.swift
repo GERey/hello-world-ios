@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var featureFlagLabel: UILabel!
 
     // Enter your feature flag name here.
-    fileprivate let featureFlagKey = "hello-ios-boolean"
+    fileprivate let featureFlagKey = "george-event-tracker-test"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,16 @@ class ViewController: UIViewController {
     }
 
     fileprivate func checkFeatureValue() {
+        
+        
         let featureFlagValue = LDClient.shared.variation(forKey: featureFlagKey, fallback: false)
+        
+        do{
+            try LDClient.shared.trackEvent(key: "test-demo-internal-numeric", data: nil ,metricValue:  10)
+        }
+        catch{
+            print("tracking call failed")
+        }
         updateLabel(value: featureFlagValue)
     }
 
